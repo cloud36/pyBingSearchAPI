@@ -42,6 +42,17 @@ class BingSearchAPI():
             request += '&' + key + '=' + str(value) 
         request = self.bing_api + self.replace_symbols(request)
         return requests.get(request, auth=(self.key, self.key))
+        
+        def relatedSearch(self, query, params):
+            '''This function takes a query and a dictionary of query params and 
+               returns bing related searchs.  Example or params is below:
+               params = {'$format': 'json', '$top': 10,'$skip': 0}
+            '''
+            request =  'Query="'  + str(query) + '"'
+            for key,value in params.iteritems():
+                request += '&' + key + '=' + str(value) 
+            request = self.bing_relate_api + self.replace_symbols(request)
+            return requests.get(request, auth=(self.key, self.key))
 
 
 if __name__ == "__main__":
